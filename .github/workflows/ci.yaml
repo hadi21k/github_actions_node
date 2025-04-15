@@ -1,0 +1,30 @@
+name: Continuous Integration Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+jobs:
+  test:
+    name: "Run Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm install
+      - name: "Run tests"
+        run: npm test
+
+  deploy:
+    name: "Deploy to Staging"
+    environment: "staging"
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to staging..."
