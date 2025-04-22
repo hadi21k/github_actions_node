@@ -26,7 +26,7 @@ jobs:
           remote_key: ${{ secrets.REMOTE_KEY }}
       - uses: JimCronqvist/action-ssh@master
         with:
-          hosts: ${{ secrets.REMOTE_HOST }}
+          hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
             cd /var/www/node-ci-cd-example
