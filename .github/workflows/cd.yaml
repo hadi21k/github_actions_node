@@ -30,7 +30,7 @@ jobs:
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
             cd /var/www/node-ci-cd-example
-            npm install
+            npm ci
             pm2 delete all || true
             pm2 start src/index.js --name "node-app"
             sudo -S service nginx restart
