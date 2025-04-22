@@ -28,7 +28,6 @@ jobs:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
-            sudo -i
             cd /var/www/server
             npm ci
             pm2 restart index
