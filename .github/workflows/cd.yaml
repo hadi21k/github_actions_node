@@ -9,7 +9,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./server
 
 jobs:
   deploy:
@@ -20,7 +19,7 @@ jobs:
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
-          remote_path: /var/www
+          remote_path: /var/www/server/
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
@@ -29,6 +28,7 @@ jobs:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
+            sudo -i
             cd /var/www/server
             npm ci
             pm2 restart index
