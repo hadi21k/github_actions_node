@@ -9,7 +9,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./
+    working-directory: ./server
 
 jobs:
   deploy:
@@ -29,7 +29,7 @@ jobs:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
-            cd /var/www/node-ci-cd-example
+            cd /var/www/server
             npm ci
             pm2 restart index
             sudo nginx -t
