@@ -9,7 +9,8 @@ app.use(express.json());
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
-    message: 'Hello World!',
+    message: "Hello World!",
+    testing: "testing",
     timestamp: new Date().toISOString(),
   });
 });
