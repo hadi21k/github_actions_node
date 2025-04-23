@@ -24,8 +24,8 @@ jobs:
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
-          rsh: "ssh -o StrictHostKeyChecking=no"
-          remote_path: /var/www
+          rsh: "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          remote_path: /var/www/server/
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
