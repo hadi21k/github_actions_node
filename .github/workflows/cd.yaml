@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Checkout
+      - run: |
+          echo ${{ secrets.REMOTE_HOST }}
+          echo ${{ secrets.REMOTE_USER }}
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
