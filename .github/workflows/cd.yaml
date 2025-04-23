@@ -23,14 +23,13 @@ jobs:
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
-          remote_path: /var/www/server
+          remote_path: /opt/my-app
       - uses: JimCronqvist/action-ssh@master
         with:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
-            sudo -i
-            cd /var/www/server
+            cd /opt/my-app
             npm ci
             pm2 restart index
             sudo nginx -t
