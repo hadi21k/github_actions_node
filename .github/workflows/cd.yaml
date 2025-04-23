@@ -16,9 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Checkout
-      - run: |
-          echo ${{ secrets.REMOTE_HOST }}
-          echo ${{ secrets.REMOTE_USER }}
+      - name: Test SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.REMOTE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
