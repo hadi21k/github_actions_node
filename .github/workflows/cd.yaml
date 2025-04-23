@@ -18,7 +18,9 @@ jobs:
         name: Checkout
       - name: Test SSH Connection
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.REMOTE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
+          echo "${{ secrets.REMOTE_KEY }}" > id_rsa
+          chmod 600 id_rsa
+          ssh -o StrictHostKeyChecking=no -i id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
