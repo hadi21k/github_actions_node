@@ -24,7 +24,7 @@ jobs:
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
-          rsh: "ssh -o LogLevel=ERROR -o StrictHostKeyChecking=no"
+          rsh: "ssh -o StrictHostKeyChecking=no"
           remote_path: /var/www
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
