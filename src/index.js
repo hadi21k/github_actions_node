@@ -10,7 +10,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Hello World!",
-    testing: "testing 2",
+    testing: "testing 3",
     timestamp: new Date().toISOString(),
   });
 });
