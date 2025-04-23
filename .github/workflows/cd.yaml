@@ -29,8 +29,9 @@ jobs:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
-            cd /opt/my-app
-            npm ci
-            pm2 restart index
-            sudo nginx -t
-            sudo systemctl restart nginx
+            bash -lc " \
+            cd /opt/my-app && \
+            npm ci && \
+            pm2 restart index \
+            sudo nginx -t && sudo systemctl restart nginx
+            "
