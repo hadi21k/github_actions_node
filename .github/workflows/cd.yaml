@@ -24,11 +24,11 @@ jobs:
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
+          path: ./
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
-          remote_path: /var/www/server/
-          rsh: ssh -T -o StrictHostKeyChecking=no
+          remote_path: /var/www/server
       - uses: JimCronqvist/action-ssh@master
         with:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
