@@ -16,11 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Checkout
-      - name: Test SSH Connection
-        run: |
-          echo "${{ secrets.REMOTE_KEY }}" > id_rsa
-          chmod 600 id_rsa
-          ssh -o StrictHostKeyChecking=no -i id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
       - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
@@ -34,7 +29,7 @@ jobs:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
-            cd /var/www/server
+            cd var/www/server
             npm ci
             pm2 restart index
             sudo nginx -t
