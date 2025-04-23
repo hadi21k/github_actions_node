@@ -20,19 +20,19 @@ jobs:
         with:
           switches: -avzr --delete --exclude 'node_modules' --rsync-path="mkdir -p /var/www/server && rsync"
           path: ./
+          remote_path: /opt/my-app
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
-          remote_path: /opt/my-app
       - uses: JimCronqvist/action-ssh@master
         with:
           hosts: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
           privateKey: ${{ secrets.REMOTE_KEY }}
           command: |
             bash -lc "\
-            cd /opt/my-app && \
-            npm ci && \
-            pm2 restart index && \
-            sudo nginx -t && \
-            sudo systemctl restart nginx\
+              cd /opt/my-app && \
+              npm ci && \
+              pm2 restart index && \
+              sudo nginx -t && \
+              sudo systemctl restart nginx\
             "
